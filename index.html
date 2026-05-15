@@ -754,6 +754,15 @@
   gtag('js', new Date());
 
   gtag('config', 'AW-952125555');
+  // Esta función envía la conversión a Ads cuando detecta tu evento
+  function trackWhatsAppCaracas() {
+    gtag('event', 'conversion', {
+        'send_to': 'AW-952125555/30UfCNu8_coDEPOQgcYD',
+        'event_callback': function() {
+          console.log('Conversión enviada a Google Ads');
+        }
+    });
+  } 
 </script>
 <body>
   <!-- Topbar -->
@@ -993,5 +1002,14 @@
       }, maxDelay);
     });
   </script>
+  <script>
+  document.addEventListener('click', function(e) {
+    // Busca si el clic fue en un enlace (o dentro de un enlace) que va a WhatsApp
+    const link = e.target.closest('a');
+    if (link && link.href.includes('wa.me')) {
+      trackWhatsAppCaracas();
+    }
+  });
+</script>
 </body>
 </html>
